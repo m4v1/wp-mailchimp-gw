@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Mailchimp Gateway
  * Plugin URI:        https://m4v1.work/wp-mailchimp-gw
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This plugin expose a Wordpress API entrypoint to manage Mailchimp forms.
  * Version:           1.0.0
  * Author:            Marco Vivi
  * Author URI:        https://m4v1.work
