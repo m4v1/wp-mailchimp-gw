@@ -50,10 +50,8 @@ class Wp_Mailchimp_Gw_Admin
      */
     public function __construct($plugin_name, $version)
     {
-
         $this->plugin_name = $plugin_name;
         $this->version = $version;
-
     }
 
     /**
@@ -77,7 +75,6 @@ class Wp_Mailchimp_Gw_Admin
          */
 
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wp-mailchimp-gw-admin.css', array(), $this->version, 'all');
-
     }
 
     /**
@@ -100,8 +97,7 @@ class Wp_Mailchimp_Gw_Admin
          * class.
          */
 
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wp-mailchimp-gw-admin.js', array('jquery'), $this->version, false);
-
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wp-mailchimp-gw-admin.js', array('jquery'), $this->version, true);
     }
 
     /**
@@ -152,6 +148,10 @@ class Wp_Mailchimp_Gw_Admin
         // Do not check Mailchimp API KEY
         $valid['wp_mailchimp_gw_api'] = $input['wp_mailchimp_gw_api'];
 
+        foreach ($input['endpoints'] as $key => $endpoint) {
+            $valid['endpoints'][$key] = $endpoint;
+        }
+
         return $valid;
     }
 
@@ -189,5 +189,4 @@ class Wp_Mailchimp_Gw_Admin
             $WpbUpdateChecker->setBranch('master');
         }
     }
-
 }
