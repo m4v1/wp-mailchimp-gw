@@ -21,3 +21,5 @@ wp-mailchimp-gw.code-workspace
 vendor/
 
 \.vscode/
+
+docker-compose\.yml
