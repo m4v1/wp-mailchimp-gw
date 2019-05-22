@@ -6,3 +6,8 @@
 .endpoint {
 	display: block;
 }
+
+.endpoint span {
+	margin: 1px;
+	padding: 3px;
+}

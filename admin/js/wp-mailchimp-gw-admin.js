@@ -29,12 +29,18 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-	$("#wp_mailchimp_gw_options").on("click", "#add", function (e) {
+	$('#wp_mailchimp_gw_options').on('click', '#add', function (e) {
 		e.preventDefault();
 		console.log('click');
 		let value = $('#add-endpoint').val();
-		$("#endpoints")
-			.append('<input class="endpoint" type="text" name="wp-mailchimp-gw[endpoints][' + value + ']" value="' + value + '" />');
+		$('#endpoints')
+			.append('<div class="endpoint"><input type="text" name="wp-mailchimp-gw[endpoints][' + value + ']" value="' + value + '" /><span id="remove" class="dashicons dashicons-trash"></span></div>');
+	});
+
+	$('#wp_mailchimp_gw_options').on('click', '#remove', function (e) {
+		e.preventDefault();
+		console.log('click');
+		$(this).parent('.endpoint').remove();
 	});
 
 })(jQuery);

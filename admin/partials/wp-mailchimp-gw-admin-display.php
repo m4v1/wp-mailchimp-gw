@@ -46,7 +46,7 @@
         <div id="endpoints">
             <?php
             foreach ($options['endpoints'] as $key => $endpoint) {
-                echo '<input class="endpoint" type="text" name="wp-mailchimp-gw[endpoints][' . $key . ']" value="' . $key . '" />';
+                echo '<div class="endpoint"><input type="text" name="wp-mailchimp-gw[endpoints][' . $key . ']" value="' . $key . '" /><span id="remove" class="dashicons dashicons-trash"></span></div>';
             }
             ?>
         </div>
