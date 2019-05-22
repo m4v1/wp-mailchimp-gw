@@ -182,9 +182,9 @@ class Wp_Mailchimp_Gw_Admin
     {
         if (is_admin()) {
             $WpbUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-                'https://gitlab.com/m4v1/wp-mailchimp-gw/', //Repo URL.
-                __FILE__, //Full path to the main plugin file.
-                'wp-biscotti' //Plugin slug.
+                'https://github.com/m4v1/wp-mailchimp-gw', //Repo URL.
+                '../wp-mailchimp-gw.php', //Full path to the main plugin file.
+                'wp-mailchimp-gw' //Plugin slug.
             );
             $WpbUpdateChecker->setBranch('master');
         }
