@@ -80,7 +80,6 @@ class Wp_Mailchimp_Gw
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
-
     }
 
     /**
@@ -131,7 +130,6 @@ class Wp_Mailchimp_Gw
         require_once plugin_dir_path(dirname(__FILE__)) . 'vendor/autoload.php';
 
         $this->loader = new Wp_Mailchimp_Gw_Loader();
-
     }
 
     /**
@@ -145,11 +143,9 @@ class Wp_Mailchimp_Gw
      */
     private function set_locale()
     {
-
         $plugin_i18n = new Wp_Mailchimp_Gw_i18n();
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
-
     }
 
     /**
@@ -161,7 +157,6 @@ class Wp_Mailchimp_Gw
      */
     private function define_admin_hooks()
     {
-
         $plugin_admin = new Wp_Mailchimp_Gw_Admin($this->get_plugin_name(), $this->get_version());
 
         // Add menu item
@@ -176,7 +171,6 @@ class Wp_Mailchimp_Gw
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-
     }
 
     /**
@@ -188,15 +182,13 @@ class Wp_Mailchimp_Gw
      */
     private function define_public_hooks()
     {
-
         $plugin_public = new Wp_Mailchimp_Gw_Public($this->get_plugin_name(), $this->get_version());
 
         // Add a custom api endpoint
-        $this->loader->add_action('rest_api_init', $plugin_public, 'add_api_endpoint');
+        $this->loader->add_action('rest_api_init', $plugin_public, 'add_api_endpoints');
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
-
     }
 
     /**
@@ -242,5 +234,4 @@ class Wp_Mailchimp_Gw
     {
         return $this->version;
     }
-
 }
