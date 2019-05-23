@@ -31,15 +31,17 @@
 
 	$('#wp_mailchimp_gw_options').on('click', '#add', function (e) {
 		e.preventDefault();
-		console.log('click');
-		let value = $('#add-endpoint').val();
-		$('#endpoints')
-			.append('<div class="endpoint"><input type="text" name="wp-mailchimp-gw[endpoints][' + value + ']" value="' + value + '" /><span id="remove" class="dashicons dashicons-trash"></span></div>');
+		let slug = $('#endpoint-slug').val();
+		let listid = $('#endpoint-listid').val();
+		let $endpoint = $('<div class="endpoint">');
+		$endpoint.append('<input type="text" name="wp-mailchimp-gw[endpoints][' + slug + '][slug]" value="' + slug + '" readonly/>');
+		$endpoint.append('<input type="hidden" name="wp-mailchimp-gw[endpoints][' + slug + '][listid]" value="' + listid + '" readonly/>');
+		$endpoint.append('<span id="remove" class="dashicons dashicons-trash"></span></div>');
+		$('#endpoints').append($endpoint);
 	});
 
 	$('#wp_mailchimp_gw_options').on('click', '#remove', function (e) {
 		e.preventDefault();
-		console.log('click');
 		$(this).parent('.endpoint').remove();
 	});
 

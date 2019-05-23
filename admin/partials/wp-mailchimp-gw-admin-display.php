@@ -24,19 +24,21 @@
         settings_fields($this->plugin_name);
         //Grab all options
         $options = get_option($this->plugin_name);
-        // Modal customization vars
-        $wp_mailchimp_gw_api = $options['wp_mailchimp_gw_api'];
         ?>
 
         <h2 class="wp-heading-inline"><?php _e('Mailchimp API Key', $this->plugin_name);?></h2>
         <fieldset class="<?php echo $this->plugin_name; ?>-admin-api">
             <input type="text" class="<?php echo $this->plugin_name; ?>-api" id="<?php echo $this->plugin_name; ?>-api"
                 name="<?php echo $this->plugin_name; ?>[wp_mailchimp_gw_api]"
-                value="<?php echo $wp_mailchimp_gw_api; ?>" size="40" />
+                value="<?php echo $options['wp_mailchimp_gw_api']; ?>" size="40" />
         </fieldset>
 
         <h2 class="wp-heading-inline"><?php _e('API Endpoints', $this->plugin_name);?></h2>
-        <div class="endpoint"><input id="add-endpoint" type="text" value="" /></div>
+        <div class="endpoint">
+            <input id="endpoint-slug" type="text" value=""
+                placeholder="<?php _e('endpoint name', $this->plugin_name);?>" />
+            <input id="endpoint-listid" type="text" value="" placeholder="<?php _e('list ID', $this->plugin_name);?>" />
+        </div>
         <p class="submit">
             <button id="add" class="button button-primary">
                 <?php _e('Add API Endpoint', $this->plugin_name); ?>
@@ -45,8 +47,13 @@
 
         <div id="endpoints">
             <?php
-            foreach ($options['endpoints'] as $key => $endpoint) {
-                echo '<div class="endpoint"><input type="text" name="wp-mailchimp-gw[endpoints][' . $key . ']" value="' . $key . '" /><span id="remove" class="dashicons dashicons-trash"></span></div>';
+            if (!empty($options['endpoints'])) {
+                foreach ($options['endpoints'] as $key => $endpoint) {
+                    echo '<div class="endpoint">';
+                    echo '<input type="text" name="wp-mailchimp-gw[endpoints][' . $key . '][slug]" value="' . $endpoint['slug'] . '" readonly/>';
+                    echo '<input type="hidden" name="wp-mailchimp-gw[endpoints][' . $key . '][listid]" value="' . $endpoint['listid'] . '" readonly/>';
+                    echo '<span id="remove" class="dashicons dashicons-trash"></span></div>';
+                }
             }
             ?>
         </div>

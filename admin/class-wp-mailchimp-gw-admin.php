@@ -148,8 +148,10 @@ class Wp_Mailchimp_Gw_Admin
         // Do not check Mailchimp API KEY
         $valid['wp_mailchimp_gw_api'] = $input['wp_mailchimp_gw_api'];
 
-        foreach ($input['endpoints'] as $key => $endpoint) {
-            $valid['endpoints'][$key] = $endpoint;
+        if (!empty($input['endpoints'])) {
+            foreach ($input['endpoints'] as $key => $endpoint) {
+                $valid['endpoints'][$key] = $endpoint;
+            }
         }
 
         return $valid;
