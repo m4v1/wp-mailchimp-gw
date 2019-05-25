@@ -154,8 +154,9 @@ class Wp_Mailchimp_Gw_Public
         $list_id = '';
 
         if (!empty($options['endpoints'])) {
-            //$slug = prev(end(explode("/", $request->get_url_params())));
-            $list_id = $options['endpoints']['test']['listid']; // need to retrieve endpoint name programmatically
+            // Getting the slug from the route url
+            $slug = array_slice(explode("/", $request->get_route()), -2, 1)[0];
+            $list_id = $options['endpoints'][$slug]['listid'];
         }
 
         $result = $MailChimp->post("lists/$list_id/members", [
