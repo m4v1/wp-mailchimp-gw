@@ -3,23 +3,18 @@
 /**
  * The admin-specific functionality of the plugin.
  *
+ * Defines the plugin name, version, and two examples hooks for how to
+ * enqueue the admin-specific stylesheet and JavaScript.
+ *
  * @link       https://m4v1.work
  * @since      1.0.0
  *
  * @package    Wp_Mailchimp_Gw
  * @subpackage Wp_Mailchimp_Gw/admin
+ * @author     Marco Vivi <marco.vivi@gmail.com>
+ *
  */
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    Wp_Mailchimp_Gw
- * @subpackage Wp_Mailchimp_Gw/admin
- * @author     Marco Vivi <marco.vivi@gmail.com>
- */
 class Wp_Mailchimp_Gw_Admin
 {
 
