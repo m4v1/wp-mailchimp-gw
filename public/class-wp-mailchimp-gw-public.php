@@ -3,23 +3,20 @@
 /**
  * The public-facing functionality of the plugin.
  *
+ * Defines the plugin name, version, and two examples hooks for how to
+ * enqueue the public-facing stylesheet and JavaScript.
+ *
  * @link       https://m4v1.work
  * @since      1.0.0
  *
  * @package    Wp_Mailchimp_Gw
  * @subpackage Wp_Mailchimp_Gw/public
+ * @author     Marco Vivi <marco.vivi@gmail.com>
+ *
  */
 
-/**
- * The public-facing functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
- *
- * @package    Wp_Mailchimp_Gw
- * @subpackage Wp_Mailchimp_Gw/public
- * @author     Marco Vivi <marco.vivi@gmail.com>
- */
+use \DrewM\MailChimp\MailChimp;
+
 class Wp_Mailchimp_Gw_Public
 {
 
@@ -113,7 +110,7 @@ class Wp_Mailchimp_Gw_Public
             foreach ($options['endpoints'] as $key => $endpoint) {
                 register_rest_route('mailchimp-gw/v1', '/' . $key . '/submit/', array(
                     'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => 'wp_mailchimp_submit',
+                    'callback' => array($this, 'wp_mailchimp_submit'),
                     'args' => array(
                         'name' => array(
                             'required' => true,
@@ -122,7 +119,7 @@ class Wp_Mailchimp_Gw_Public
                             }
                         ),
                         'surname' => array(
-                            'required' => false,
+                            'required' => true,
                             'sanitize_callback' => function ($param, $request, $key) {
                                 return filter_var($param, FILTER_SANITIZE_STRING);
                             }
@@ -157,8 +154,8 @@ class Wp_Mailchimp_Gw_Public
         $list_id = '';
 
         if (!empty($options['endpoints'])) {
-            $slug = prev(end(explode("/", $request->get_url_params())));
-            $list_id = $options['endpoints'][$slug]['listid'];
+            //$slug = prev(end(explode("/", $request->get_url_params())));
+            $list_id = $options['endpoints']['test']['listid']; // need to retrieve endpoint name programmatically
         }
 
         $result = $MailChimp->post("lists/$list_id/members", [
