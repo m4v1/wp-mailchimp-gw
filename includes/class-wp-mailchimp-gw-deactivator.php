@@ -20,17 +20,17 @@
  * @subpackage Wp_Mailchimp_Gw/includes
  * @author     Marco Vivi <marco.vivi@gmail.com>
  */
-class Wp_Mailchimp_Gw_Deactivator
-{
+class Wp_Mailchimp_Gw_Deactivator {
 
-    /**
-     * Short Description. (use period)
-     *
-     * Long Description.
-     *
-     * @since    1.0.0
-     */
-    public static function deactivate()
-    {
-    }
+	/**
+	 * Short Description. (use period)
+	 *
+	 * Long Description.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function deactivate() {
+
+	}
+
 }

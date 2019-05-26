@@ -24,21 +24,24 @@
  * @subpackage Wp_Mailchimp_Gw/includes
  * @author     Marco Vivi <marco.vivi@gmail.com>
  */
-class Wp_Mailchimp_Gw_i18n
-{
+class Wp_Mailchimp_Gw_i18n {
 
 
-    /**
-     * Load the plugin text domain for translation.
-     *
-     * @since    1.0.0
-     */
-    public function load_plugin_textdomain()
-    {
-        load_plugin_textdomain(
-            'wp-mailchimp-gw',
-            false,
-            dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
-        );
-    }
+	/**
+	 * Load the plugin text domain for translation.
+	 *
+	 * @since    1.0.0
+	 */
+	public function load_plugin_textdomain() {
+
+		load_plugin_textdomain(
+			'wp-mailchimp-gw',
+			false,
+			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+		);
+
+	}
+
+
+
 }
