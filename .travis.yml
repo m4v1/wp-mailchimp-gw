@@ -44,5 +44,5 @@ before_script:
 script:
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      phpcs
+      phpcs .
     fi
