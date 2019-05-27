@@ -169,12 +169,12 @@ class Wp_Mailchimp_Gw_Admin
      */
     public function update_checker() {
         if ( is_admin() ) {
-            $WpbUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+            $wpb_update_checker = Puc_v4_Factory::buildUpdateChecker(
                 'https://github.com/m4v1/wp-mailchimp-gw', //Repo URL.
                 '../wp-mailchimp-gw.php', //Full path to the main plugin file.
                 'wp-mailchimp-gw' //Plugin slug.
             );
-            $WpbUpdateChecker->setBranch('master');
+            $wpb_update_checker->setBranch('master');
         }
     }
 }
