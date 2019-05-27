@@ -8,6 +8,10 @@ notifications:
     on_success: never
     on_failure: change
 
+#branches:
+#  only:
+#    - master
+
 cache:
   directories:
     - vendor
@@ -16,9 +20,7 @@ cache:
 matrix:
   include:
     - php: 7.2
-      env:
-      - WP_TRAVISCI=phpcs
-      - BUILD=true
+      env: WP_TRAVISCI=phpcs
     - php: 7.1
       env: WP_TRAVISCI=phpcs
     - php: 5.6
@@ -49,19 +51,10 @@ script:
       phpcs .
     fi
 
-before_deploy:
-  - mkdir wp-mailchimp-gw
-  - mv *.* wp-mailchimp-gw
-  - zip –r wp-mailchimp-gw.zip wp-mailchimp-gw
-  on:
-    tags: true
-    condition: "$BUILD == true"
-
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
-  file: "wp-mailchimp-gw.zip"
+  file: "index.php"
   skip_cleanup: true
   on:
     tags: true
-    condition: "$BUILD == true"
