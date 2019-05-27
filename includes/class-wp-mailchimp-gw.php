@@ -68,10 +68,10 @@ class Wp_Mailchimp_Gw
      * @since    1.0.0
      */
     public function __construct() {
+
+		$this->version = '1.0.0';
         if ( defined('WP_MAILCHIMP_GW_VERSION') ) {
             $this->version = WP_MAILCHIMP_GW_VERSION;
-        } else {
-            $this->version = '1.0.0';
         }
         $this->plugin_name = 'wp-mailchimp-gw';
 
