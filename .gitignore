@@ -5,3 +5,5 @@ vendor/
 \.vscode/
 
 docker-compose\.yml
+
+.env
