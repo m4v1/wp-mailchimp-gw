@@ -54,7 +54,7 @@ script:
 before_deploy:
   - mkdir wp-mailchimp-gw
   - mv *.* wp-mailchimp-gw
-  - zip –r wp-mailchimp-gw.zip wp-mailchimp-gw
+  - zip -r -q wp-mailchimp-gw.zip wp-mailchimp-gw/
 
 deploy:
   provider: releases
