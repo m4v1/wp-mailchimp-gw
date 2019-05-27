@@ -179,11 +179,6 @@ class Wp_Mailchimp_Gw_Public
 				'result'       => $result,
             ];
 
-            $to = 'info@pkctravelinsurance.com';
-            $subject = 'Errore Form Newsletter assicurazioneviaggio.it';
-            $message = "L'utente {$name} {$surname} ha tentato la registrazione con la mail: {$email} ma si è verificato un errore.";
-            wp_mail($to, $subject, $message);
-
             return new WP_REST_Response($data, 400);
         }
     }
