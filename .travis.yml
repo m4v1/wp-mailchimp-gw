@@ -43,6 +43,7 @@ before_script:
       composer global require wp-coding-standards/wpcs
       phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
     fi
+
 script:
   # Search for PHP syntax errors with php.
   - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
@@ -51,3 +52,11 @@ script:
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs .
     fi
+
+deploy:
+  provider: releases
+  api_key: GITHUB_OAUTH_TOKEN
+  file: "index.php"
+  skip_cleanup: true
+  on:
+    tags: true
