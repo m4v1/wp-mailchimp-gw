@@ -171,15 +171,18 @@ class Wp_Mailchimp_Gw_Public
             ];
 
             return new WP_REST_Response($data, 200);
-        } else {
-            $data = [
-				'success'      => false,
-				'lasterror'    => $mail_chimp->getLastError(),
-				'lastresponse' => $mail_chimp->getLastResponse(),
-				'result'       => $result,
-            ];
+		}
 
-            return new WP_REST_Response($data, 400);
-        }
-    }
+		// If Mailchimp api call goes wrong return the error
+        $data = [
+			'success'      => false,
+			'lasterror'    => $mail_chimp->getLastError(),
+			'lastresponse' => $mail_chimp->getLastResponse(),
+			'result'       => $result,
+        ];
+
+        return new WP_REST_Response($data, 400);
+
+	}
+
 }
