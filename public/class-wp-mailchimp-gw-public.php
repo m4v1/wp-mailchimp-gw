@@ -144,7 +144,7 @@ class Wp_Mailchimp_Gw_Public
 
         $options = get_option($this->plugin_name);
 
-        $MailChimp = new MailChimp($options['wp_mailchimp_gw_api']);
+        $mail_chimp = new MailChimp($options['wp_mailchimp_gw_api']);
 
         $list_id = '';
 
@@ -154,7 +154,7 @@ class Wp_Mailchimp_Gw_Public
             $list_id = $options['endpoints'][ $slug ]['listid'];
         }
 
-        $result = $MailChimp->post("lists/$list_id/members", [
+        $result = $mail_chimp->post("lists/$list_id/members", [
 			'email_address' => $email,
 			'status'        => 'subscribed',
 			'source'        => 'Sito Web',
@@ -164,7 +164,7 @@ class Wp_Mailchimp_Gw_Public
 			],
 		]);
 
-        if ( $MailChimp->success() ) {
+        if ( $mail_chimp->success() ) {
             $data = [
 				'success' => true,
 				'result'  => $result,
@@ -174,8 +174,8 @@ class Wp_Mailchimp_Gw_Public
         } else {
             $data = [
 				'success'      => false,
-				'lasterror'    => $MailChimp->getLastError(),
-				'lastresponse' => $MailChimp->getLastResponse(),
+				'lasterror'    => $mail_chimp->getLastError(),
+				'lastresponse' => $mail_chimp->getLastResponse(),
 				'result'       => $result,
             ];
 
