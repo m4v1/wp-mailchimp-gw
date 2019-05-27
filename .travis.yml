@@ -55,7 +55,7 @@ script:
 
 deploy:
   provider: releases
-  api_key: GITHUB_OAUTH_TOKEN
+  api_key: $GITHUB_OAUTH_TOKEN
   file: "index.php"
   skip_cleanup: true
   on:
