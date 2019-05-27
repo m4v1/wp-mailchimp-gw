@@ -43,8 +43,7 @@ class Wp_Mailchimp_Gw_Admin
      * @param      string    $plugin_name       The name of this plugin.
      * @param      string    $version    The version of this plugin.
      */
-    public function __construct($plugin_name, $version)
-    {
+    public function __construct( $plugin_name, $version ) {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
     }
@@ -54,8 +53,7 @@ class Wp_Mailchimp_Gw_Admin
      *
      * @since    1.0.0
      */
-    public function enqueue_styles()
-    {
+    public function enqueue_styles() {
 
         /**
          * This function is provided for demonstration purposes only.
@@ -77,8 +75,7 @@ class Wp_Mailchimp_Gw_Admin
      *
      * @since    1.0.0
      */
-    public function enqueue_scripts()
-    {
+    public function enqueue_scripts() {
 
         /**
          * This function is provided for demonstration purposes only.
@@ -92,7 +89,7 @@ class Wp_Mailchimp_Gw_Admin
          * class.
          */
 
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wp-mailchimp-gw-admin.js', array('jquery'), $this->version, true);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wp-mailchimp-gw-admin.js', array( 'jquery' ), $this->version, true);
     }
 
     /**
@@ -100,9 +97,8 @@ class Wp_Mailchimp_Gw_Admin
      *
      * @since    1.0.0
      */
-    public function add_plugin_admin_menu()
-    {
-        add_options_page('WP Mailchimp Gateway', 'WP Mailchimp', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page'));
+    public function add_plugin_admin_menu() {
+        add_options_page('WP Mailchimp Gateway', 'WP Mailchimp', 'manage_options', $this->plugin_name, array( $this, 'display_plugin_setup_page' ));
     }
 
     /**
@@ -111,8 +107,7 @@ class Wp_Mailchimp_Gw_Admin
      * @since    1.0.0
      */
 
-    public function add_action_links($links)
-    {
+    public function add_action_links( $links ) {
         $settings_link = array(
             '<a href="' . admin_url('options-general.php?page=' . $this->plugin_name) . '">' . __('Settings', $this->plugin_name) . '</a>',
         );
@@ -125,8 +120,7 @@ class Wp_Mailchimp_Gw_Admin
      * @since    1.0.0
      */
 
-    public function display_plugin_setup_page()
-    {
+    public function display_plugin_setup_page() {
         include_once 'partials/wp-mailchimp-gw-admin-display.php';
     }
 
@@ -135,17 +129,16 @@ class Wp_Mailchimp_Gw_Admin
      *
      * @since    1.0.0
      */
-    public function validate($input)
-    {
+    public function validate( $input ) {
         // All  inputs
         $valid = array();
 
         // Do not check Mailchimp API KEY
         $valid['wp_mailchimp_gw_api'] = $input['wp_mailchimp_gw_api'];
 
-        if (!empty($input['endpoints'])) {
-            foreach ($input['endpoints'] as $key => $endpoint) {
-                $valid['endpoints'][$key] = $endpoint;
+        if ( ! empty($input['endpoints']) ) {
+            foreach ( $input['endpoints'] as $key => $endpoint ) {
+                $valid['endpoints'][ $key ] = $endpoint;
             }
         }
 
@@ -157,9 +150,8 @@ class Wp_Mailchimp_Gw_Admin
      *
      * @since    1.0.0
      */
-    public function options_update()
-    {
-        register_setting($this->plugin_name, $this->plugin_name, array($this, 'validate'));
+    public function options_update() {
+        register_setting($this->plugin_name, $this->plugin_name, array( $this, 'validate' ));
     }
 
     /**
@@ -175,9 +167,8 @@ class Wp_Mailchimp_Gw_Admin
      * @link https://github.com/YahnisElsts/plugin-update-checker
      * @link https://github.com/YahnisElsts/wp-update-server
      */
-    public function update_checker()
-    {
-        if (is_admin()) {
+    public function update_checker() {
+        if ( is_admin() ) {
             $WpbUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
                 'https://github.com/m4v1/wp-mailchimp-gw', //Repo URL.
                 '../wp-mailchimp-gw.php', //Full path to the main plugin file.

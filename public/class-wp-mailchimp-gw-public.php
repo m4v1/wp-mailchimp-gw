@@ -45,8 +45,7 @@ class Wp_Mailchimp_Gw_Public
      * @param      string    $plugin_name       The name of the plugin.
      * @param      string    $version    The version of this plugin.
      */
-    public function __construct($plugin_name, $version)
-    {
+    public function __construct( $plugin_name, $version ) {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
     }
@@ -56,8 +55,7 @@ class Wp_Mailchimp_Gw_Public
      *
      * @since    1.0.0
      */
-    public function enqueue_styles()
-    {
+    public function enqueue_styles() {
 
         /**
          * This function is provided for demonstration purposes only.
@@ -79,8 +77,7 @@ class Wp_Mailchimp_Gw_Public
      *
      * @since    1.0.0
      */
-    public function enqueue_scripts()
-    {
+    public function enqueue_scripts() {
 
         /**
          * This function is provided for demonstration purposes only.
@@ -98,39 +95,38 @@ class Wp_Mailchimp_Gw_Public
     }
 
     /**
-     * Register Wordpress API endpoints that web forms can use to submit data to mailchimp.
+     * Register WordPress API endpoints that web forms can use to submit data to mailchimp.
      *
      * @since    1.0.0
      */
-    public function add_api_endpoints()
-    {
+    public function add_api_endpoints() {
         $options = get_option($this->plugin_name);
 
-        if (!empty($options['endpoints'])) {
-            foreach ($options['endpoints'] as $key => $endpoint) {
+        if ( ! empty($options['endpoints']) ) {
+            foreach ( $options['endpoints'] as $key => $endpoint ) {
                 register_rest_route('mailchimp-gw/v1', '/' . $key . '/submit/', array(
-                    'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => array($this, 'wp_mailchimp_submit'),
-                    'args' => array(
-                        'name' => array(
-                            'required' => true,
-                            'sanitize_callback' => function ($param, $request, $key) {
+                    'methods'  => WP_REST_Server::CREATABLE,
+                    'callback' => array( $this, 'wp_mailchimp_submit' ),
+                    'args'     => array(
+                        'name'    => array(
+                            'required'          => true,
+                            'sanitize_callback' => function ( $param, $request, $key ) {
                                 return filter_var($param, FILTER_SANITIZE_STRING);
-                            }
+                            },
                         ),
                         'surname' => array(
-                            'required' => true,
-                            'sanitize_callback' => function ($param, $request, $key) {
+                            'required'          => true,
+                            'sanitize_callback' => function ( $param, $request, $key ) {
                                 return filter_var($param, FILTER_SANITIZE_STRING);
-                            }
+                            },
                         ),
-                        'email' => array(
-                            'required' => true,
-                            'validate_callback' => function ($param, $request, $key) {
+                        'email'   => array(
+                            'required'          => true,
+                            'validate_callback' => function ( $param, $request, $key ) {
                                 return filter_var($param, FILTER_VALIDATE_EMAIL);
-                            }
+                            },
                         ),
-                    )
+                    ),
                 ));
             }
         }
@@ -141,8 +137,7 @@ class Wp_Mailchimp_Gw_Public
      *
      * @since    1.0.0
      */
-    public function wp_mailchimp_submit(WP_REST_Request $request)
-    {
+    public function wp_mailchimp_submit( WP_REST_Request $request ) {
         $name = $request->get_param('name');
         $surname = $request->get_param('surname');
         $email = $request->get_param('email');
@@ -153,32 +148,35 @@ class Wp_Mailchimp_Gw_Public
 
         $list_id = '';
 
-        if (!empty($options['endpoints'])) {
+        if ( ! empty($options['endpoints']) ) {
             // Getting the slug from the route url
             $slug = array_slice(explode("/", $request->get_route()), -2, 1)[0];
-            $list_id = $options['endpoints'][$slug]['listid'];
+            $list_id = $options['endpoints'][ $slug ]['listid'];
         }
 
         $result = $MailChimp->post("lists/$list_id/members", [
-                    'email_address' => $email,
-                    'status' => 'subscribed',
-                    'source' => 'Sito Web',
-                    'merge_fields' => ['FNAME'=>$name, 'LNAME'=>$surname],
-                ]);
+			'email_address' => $email,
+			'status'        => 'subscribed',
+			'source'        => 'Sito Web',
+			'merge_fields'  => [
+				'FNAME' => $name,
+				'LNAME' => $surname,
+			],
+		]);
 
-        if ($MailChimp->success()) {
+        if ( $MailChimp->success() ) {
             $data = [
-            'success' => true,
-            'result' => $result
+				'success' => true,
+				'result'  => $result,
             ];
 
             return new WP_REST_Response($data, 200);
         } else {
             $data = [
-            'success' => false,
-            'lasterror' => $MailChimp->getLastError(),
-            'lastresponse' => $MailChimp->getLastResponse(),
-            'result' => $result
+				'success'      => false,
+				'lasterror'    => $MailChimp->getLastError(),
+				'lastresponse' => $MailChimp->getLastResponse(),
+				'result'       => $result,
             ];
 
             $to = 'info@pkctravelinsurance.com';

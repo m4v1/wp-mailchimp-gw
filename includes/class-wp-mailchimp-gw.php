@@ -67,9 +67,8 @@ class Wp_Mailchimp_Gw
      *
      * @since    1.0.0
      */
-    public function __construct()
-    {
-        if (defined('WP_MAILCHIMP_GW_VERSION')) {
+    public function __construct() {
+        if ( defined('WP_MAILCHIMP_GW_VERSION') ) {
             $this->version = WP_MAILCHIMP_GW_VERSION;
         } else {
             $this->version = '1.0.0';
@@ -98,8 +97,7 @@ class Wp_Mailchimp_Gw
      * @since    1.0.0
      * @access   private
      */
-    private function load_dependencies()
-    {
+    private function load_dependencies() {
 
         /**
          * The class responsible for orchestrating the actions and filters of the
@@ -141,8 +139,7 @@ class Wp_Mailchimp_Gw
      * @since    1.0.0
      * @access   private
      */
-    private function set_locale()
-    {
+    private function set_locale() {
         $plugin_i18n = new Wp_Mailchimp_Gw_i18n();
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
@@ -155,8 +152,7 @@ class Wp_Mailchimp_Gw
      * @since    1.0.0
      * @access   private
      */
-    private function define_admin_hooks()
-    {
+    private function define_admin_hooks() {
         $plugin_admin = new Wp_Mailchimp_Gw_Admin($this->get_plugin_name(), $this->get_version());
 
         // Add menu item
@@ -180,8 +176,7 @@ class Wp_Mailchimp_Gw
      * @since    1.0.0
      * @access   private
      */
-    private function define_public_hooks()
-    {
+    private function define_public_hooks() {
         $plugin_public = new Wp_Mailchimp_Gw_Public($this->get_plugin_name(), $this->get_version());
 
         // Add a custom api endpoint
@@ -196,8 +191,7 @@ class Wp_Mailchimp_Gw
      *
      * @since    1.0.0
      */
-    public function run()
-    {
+    public function run() {
         $this->loader->run();
     }
 
@@ -208,8 +202,7 @@ class Wp_Mailchimp_Gw
      * @since     1.0.0
      * @return    string    The name of the plugin.
      */
-    public function get_plugin_name()
-    {
+    public function get_plugin_name() {
         return $this->plugin_name;
     }
 
@@ -219,8 +212,7 @@ class Wp_Mailchimp_Gw
      * @since     1.0.0
      * @return    Wp_Mailchimp_Gw_Loader    Orchestrates the hooks of the plugin.
      */
-    public function get_loader()
-    {
+    public function get_loader() {
         return $this->loader;
     }
 
@@ -230,8 +222,7 @@ class Wp_Mailchimp_Gw
      * @since     1.0.0
      * @return    string    The version number of the plugin.
      */
-    public function get_version()
-    {
+    public function get_version() {
         return $this->version;
     }
 }

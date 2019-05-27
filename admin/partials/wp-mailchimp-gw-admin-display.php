@@ -47,8 +47,8 @@
 
         <div id="endpoints">
             <?php
-            if (!empty($options['endpoints'])) {
-                foreach ($options['endpoints'] as $key => $endpoint) {
+            if ( ! empty($options['endpoints']) ) {
+                foreach ( $options['endpoints'] as $key => $endpoint ) {
                     echo '<div class="endpoint">';
                     echo '<input type="text" name="wp-mailchimp-gw[endpoints][' . $key . '][slug]" value="' . $endpoint['slug'] . '" readonly/>';
                     echo '<input type="hidden" name="wp-mailchimp-gw[endpoints][' . $key . '][listid]" value="' . $endpoint['listid'] . '" readonly/>';
