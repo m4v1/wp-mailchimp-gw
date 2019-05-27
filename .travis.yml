@@ -28,35 +28,39 @@ matrix:
     - php: 5.6
       env: WP_TRAVISCI=phpcs
 
-before_script:
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer self-update
-  - composer install --prefer-source --no-interaction --dev
-  - |
-    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
-      phpenv config-rm xdebug.ini
-    else
-      echo "xdebug.ini does not exist"
-    fi
-  - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      composer global require wp-coding-standards/wpcs
-      phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
-    fi
+- stage: Test
 
-script:
-  # Search for PHP syntax errors with php.
-  - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
-  # Search for PHP code style errors with phpcs.
-  - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      phpcs .
-    fi
+  before_script:
+    - export PATH="$HOME/.composer/vendor/bin:$PATH"
+    - composer self-update
+    - composer install --prefer-source --no-interaction --dev
+    - |
+      if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+        phpenv config-rm xdebug.ini
+      else
+        echo "xdebug.ini does not exist"
+      fi
+    - |
+      if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+        composer global require wp-coding-standards/wpcs
+        phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+      fi
 
-deploy:
-  provider: releases
-  api_key: GITHUB_OAUTH_TOKEN
-  file: "index.php"
-  skip_cleanup: true
-  on:
-    tags: true
+  script:
+    # Search for PHP syntax errors with php.
+    - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+    # Search for PHP code style errors with phpcs.
+    - |
+      if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+        phpcs .
+      fi
+
+- stage: GitHub Release
+
+  deploy:
+    provider: releases
+    api_key: GITHUB_OAUTH_TOKEN
+    file: "index.php"
+    skip_cleanup: true
+    on:
+      tags: true
