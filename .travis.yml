@@ -42,6 +42,9 @@ before_script:
       phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
     fi
 script:
+  # Search for PHP syntax errors with php.
+  - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+  # Search for PHP code style errors with phpcs.
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs .
