@@ -24,7 +24,6 @@
         settings_fields($this->plugin_name);
         //Grab all options
 		$options = get_option($this->plugin_name);
-		print_r($options);
         ?>
 
         <h2 class="wp-heading-inline"><?php esc_html_e('Mailchimp API Key', $this->plugin_name);?></h2>
@@ -52,10 +51,10 @@
             <?php
             if ( ! empty($options['endpoints']) ) {
                 foreach ( $options['endpoints'] as $key => $endpoint ) {
-                	echo esc_html('<div class="endpoint">');
-                	echo esc_html('<input type="text" name="wp-mailchimp-gw[endpoints][' . $key . '][slug]" value="' . $endpoint['slug'] . '" readonly/>');
-                	echo esc_html('<input type="hidden" name="wp-mailchimp-gw[endpoints][' . $key . '][listid]" value="' . $endpoint['listid'] . '" readonly/>');
-                	echo esc_html('<span id="remove" class="dashicons dashicons-trash"></span></div>');
+                	echo '<div class="endpoint">';
+                	echo '<input type="text" name="wp-mailchimp-gw[endpoints][' . esc_html($key) . '][slug]" value="' . esc_html($endpoint['slug']) . '" readonly/>';
+                	echo '<input type="hidden" name="wp-mailchimp-gw[endpoints][' . esc_html($key) . '][listid]" value="' . esc_html($endpoint['listid']) . '" readonly/>';
+                	echo '<span id="remove" class="dashicons dashicons-trash"></span></div>';
                 }
             }
             ?>
