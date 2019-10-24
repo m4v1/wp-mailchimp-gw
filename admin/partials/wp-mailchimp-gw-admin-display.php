@@ -24,7 +24,6 @@
         settings_fields($this->plugin_name);
         //Grab all options
 		$options = get_option($this->plugin_name);
-		print_r($options);
         ?>
 
         <h2 class="wp-heading-inline"><?php esc_html_e('Mailchimp API Key', $this->plugin_name);?></h2>
