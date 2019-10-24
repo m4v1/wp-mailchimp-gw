@@ -11,3 +11,9 @@
 	margin: 1px;
 	padding: 3px;
 }
+
+.wp-mailchimp-url-preview {
+	font-family: Consolas, Monaco, monospace;
+	font-family: 11px;
+	margin-left: 1rem;
+}
