@@ -52,10 +52,10 @@
             <?php
             if ( ! empty($options['endpoints']) ) {
                 foreach ( $options['endpoints'] as $key => $endpoint ) {
-                    esc_html('<div class="endpoint">');
-                    esc_html('<input type="text" name="wp-mailchimp-gw[endpoints][' . $key . '][slug]" value="' . $endpoint['slug'] . '" readonly/>');
-                    esc_html('<input type="hidden" name="wp-mailchimp-gw[endpoints][' . $key . '][listid]" value="' . $endpoint['listid'] . '" readonly/>');
-                    esc_html('<span id="remove" class="dashicons dashicons-trash"></span></div>');
+                	echo esc_html('<div class="endpoint">');
+                	echo esc_html('<input type="text" name="wp-mailchimp-gw[endpoints][' . $key . '][slug]" value="' . $endpoint['slug'] . '" readonly/>');
+                	echo esc_html('<input type="hidden" name="wp-mailchimp-gw[endpoints][' . $key . '][listid]" value="' . $endpoint['listid'] . '" readonly/>');
+                	echo esc_html('<span id="remove" class="dashicons dashicons-trash"></span></div>');
                 }
             }
             ?>
