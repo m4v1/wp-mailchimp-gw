@@ -55,7 +55,7 @@
                 	echo '<input type="text" name="wp-mailchimp-gw[endpoints][' . esc_html($key) . '][slug]" value="' . esc_html($endpoint['slug']) . '" readonly/>';
                 	echo '<input type="hidden" name="wp-mailchimp-gw[endpoints][' . esc_html($key) . '][listid]" value="' . esc_html($endpoint['listid']) . '" readonly/>';
                     echo '<span id="remove" class="dashicons dashicons-trash"></span>';
-                    echo '<span class="wp-mailchimp-url-preview">url: /wp-json/' . esc_html($endpoint['slug']) . '/v1/submit</span>';
+                    echo '<span class="wp-mailchimp-url-preview">url: /wp-json/mailchimp-gw/v1/' . esc_html($endpoint['slug']) . '/submit</span>';
                     echo '</div>';
                 }
             }
