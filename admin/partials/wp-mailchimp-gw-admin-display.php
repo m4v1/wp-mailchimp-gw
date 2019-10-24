@@ -23,15 +23,16 @@
         <?php
         settings_fields($this->plugin_name);
         //Grab all options
-        $options = get_option($this->plugin_name);
+		$options = get_option($this->plugin_name);
+		print_r($options);
         ?>
 
         <h2 class="wp-heading-inline"><?php esc_html_e('Mailchimp API Key', $this->plugin_name);?></h2>
-        <fieldset class="<?php esc_html($this->plugin_name); ?>-admin-api">
-            <input type="text" class="<?php esc_html($this->plugin_name); ?>-api"
-                id="<?php esc_html($this->plugin_name); ?>-api"
-                name="<?php esc_html($this->plugin_name); ?>[wp_mailchimp_gw_api]"
-                value="<?php esc_html($options['wp_mailchimp_gw_api']); ?>" size="40" />
+        <fieldset class="<?php echo esc_html($this->plugin_name); ?>-admin-api">
+            <input type="text" class="<?php echo esc_html($this->plugin_name); ?>-api"
+                id="<?php echo esc_html($this->plugin_name); ?>-api"
+                name="<?php echo esc_html($this->plugin_name); ?>[wp_mailchimp_gw_api]"
+                value="<?php echo esc_html($options['wp_mailchimp_gw_api']); ?>" size="40" />
         </fieldset>
 
         <h2 class="wp-heading-inline"><?php esc_html_e('API Endpoints', $this->plugin_name);?></h2>
